@@ -47,40 +47,36 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <control:SelectFileControl 
+            <control:SelectPdfControl 
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 FilePath="{Binding FilePath,ElementName=_window,Mode=TwoWay}"
                 />
-            <TextBlock
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="2"
-                Text="Client ID"
-                />
-            <TextBox 
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="2"
-                IsReadOnly="True"
-                />
-            <TextBlock
+            <control:CredentialsControl 
+                x:Name="_credentialsControl"
                 Grid.Row="2"
                 Grid.Column="0"
-                Margin="2"
-                Text="Client Sercets"
                 />
-            <TextBox 
-                Grid.Row="2"
-                Grid.Column="1"
-                Margin="2"
-                IsReadOnly="True"
-                />
+            <StackPanel
+                x:Name="_stackPanel"
+                Grid.Row="3"
+                Grid.Column="0"
+                Orientation="Vertical"
+                >
+                <Menu>
+                    <MenuItem 
+                        Header="結合"
+                        Click="_combineMenuItemClick"
+                        />
+                    <MenuItem 
+                        Header="自動タグ"
+                        Click="_autoTagMenuItemClick"
+                        />
+                </Menu>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
