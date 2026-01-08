@@ -8,6 +8,9 @@
     <Compile Update="Controls\CombineControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\CompressControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\CredentialsControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
