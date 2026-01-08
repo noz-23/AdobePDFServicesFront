@@ -1,20 +1,13 @@
-﻿using Adobe.PDFServicesSDK.auth;
+﻿using Adobe.PDFServicesSDK.io;
 using AdobePDFServicesFront.Controls;
-using Microsoft.Win32;
+using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AdobePDFServicesFront.Windows;
 
@@ -64,6 +57,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     }
     private string _filePath = string.Empty;
 
+    public ObservableCollection<EventControl> ControlList { get; } =new ();
 
     //// Initial setup, create credentials instance
     //ICredentials credentials = new ServicePrincipalCredentials(
@@ -77,24 +71,62 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     #endregion
 
     #region イベント
-    private async void _loaded(object sender, RoutedEventArgs e)
+    private async void _loaded(object sender_, RoutedEventArgs e_)
     {
         await _webView.EnsureCoreWebView2Async(null);
     }
+
+    private void _runButtonClick(object sender_, RoutedEventArgs e_)
+    {
+        var pdfServices = _credentialsControl.PdfServices;
+
+        if (pdfServices == null)
+        {
+            MessageBox.Show("認証失敗。");
+            return;
+        }
+        var asset = _selectPdfControl.GetAsset(pdfServices);
+
+        foreach (var control in ControlList)
+        {
+            asset = control.EventProcess(pdfServices, asset);
+        }
+
+        if (asset != null)
+        {
+            var dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = "output"+Resource.ExtensionPDF,
+                DefaultExt = Resource.ExtensionPDF,
+                Filter = $"PDF ファイル (*{Resource.ExtensionPDF})|*{Resource.ExtensionPDF}",
+            };
+
+            if (dlg.ShowDialog() == false)
+            {
+                return;
+            }
+            Debug.WriteLine($"SavePath {dlg.FileName}");
+
+            // Get content from the resulting asset(s)
+            var streamAsset = pdfServices.GetContent(asset);
+
+            // Creating output streams and copying stream asset's content to it
+
+            using var outputStream = File.OpenWrite(dlg.FileName);
+            streamAsset.Stream.CopyTo(outputStream);
+            outputStream.Close();
+        }
+    }
     #endregion
 
-    public List<Control> _controlList = new ();
+    //public List<Control> _controlList = new ();
 
-    private void _combineMenuItemClick(object sender_, RoutedEventArgs e_)
-    {
-        _stackPanel.Children.Add(new CombineControl(_stackPanel));
-        Debug.WriteLine("追加 結合");
-    }
+    #region メニュー
+    private void _combineMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new CombineControl(ControlList));
+    private void _autoTagMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new AutoTagControl(ControlList));
+    private void _compressMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new CompressControl(ControlList));
+    #endregion
 
-    private void _autoTagMenuItemClick(object sender_, RoutedEventArgs e_)
-    {
-        _stackPanel.Children.Add(new AutoTagControl(_stackPanel));
-        Debug.WriteLine("追加 自動タグ");
-    }
-    
+    // D&D
+    // https://qiita.com/gego/items/25298cd52c4612fc1edf
 }

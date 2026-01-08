@@ -32,7 +32,7 @@
             Grid.Row="0"
             Grid.Column="1"
             Width="2"
-            Background="Black" 
+            Background="Gray" 
             HorizontalAlignment="Center" 
             />
         <Grid
@@ -45,38 +45,62 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <control:SelectPdfControl 
+            <control:SelectPdfControl
+                x:Name="_selectPdfControl"
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                FilePath="{Binding FilePath,ElementName=_window,Mode=TwoWay}"
+                FilePath="{Binding FilePath,ElementName=_window,Mode=OneWay}"
                 />
             <control:CredentialsControl 
                 x:Name="_credentialsControl"
                 Grid.Row="2"
                 Grid.Column="0"
                 />
-            <StackPanel
-                x:Name="_stackPanel"
+            <Menu
                 Grid.Row="3"
                 Grid.Column="0"
-                Orientation="Vertical"
                 >
-                <Menu>
-                    <MenuItem 
+                <MenuItem 
                         Header="結合"
                         Click="_combineMenuItemClick"
                         />
-                    <MenuItem 
+                <MenuItem 
                         Header="自動タグ"
                         Click="_autoTagMenuItemClick"
                         />
-                </Menu>
-            </StackPanel>
+                <MenuItem 
+                        Header="軽量化"
+                        Click="_compressMenuItemClick"
+                        />
+            </Menu>
+            <ItemsControl
+                x:Name="_itemsPanel"
+                Grid.Row="4"
+                Grid.Column="0"
+                ItemsSource="{Binding ControlList,ElementName=_window,Mode=OneWay}"
+                >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Orientation="Vertical"
+                            />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Button
+                Grid.Row="5"
+                Grid.Column="0"
+                Margin="2"
+                Content="実行"
+                Click="_runButtonClick"
+                />
         </Grid>
     </Grid>
 </Window>
