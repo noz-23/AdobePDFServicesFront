@@ -3,17 +3,16 @@ using Adobe.PDFServicesSDK.io;
 using Adobe.PDFServicesSDK.pdfjobs.jobs;
 using Adobe.PDFServicesSDK.pdfjobs.parameters.combinepdf;
 using Adobe.PDFServicesSDK.pdfjobs.results;
+using AdobePDFServicesFront.Interfaces;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
-using System.Windows.Controls;
 
 namespace AdobePDFServicesFront.Controls;
 
 /// <summary>
 /// CombineControl.xaml の相互作用ロジック
 /// </summary>
-public partial class CombineControl : EventControl
+public partial class CombineControl : EventControl,IPageCount
 {
     // 丸ボタン
     // https://qiita.com/rioLi0N/items/be25d8fe2d8c3b4b3c29
@@ -22,8 +21,6 @@ public partial class CombineControl : EventControl
         Debug.WriteLine("追加 結合");
 
         InitializeComponent();
-
-        //_owner = owner_;
     }
     #region プロパティ
     public string CombinePath
@@ -32,29 +29,13 @@ public partial class CombineControl : EventControl
         set => _selectPdfControl.FilePath = value;
     }
 
+    public int PageCount
+    {
+        get => _selectPdfControl.PageCount;
+        set => _selectPdfControl.PageCount =value;
+    }
+
     #endregion 
-
-    //#region イベント
-    //private void _buttonClick(object sender, System.Windows.RoutedEventArgs e)
-    //{
-    //    _owner?.Children.Remove(this);
-
-    //    Debug.WriteLine($"削除 結合[{CombinePath}]");
-    //}
-    //#endregion
-
-    //private Panel? _owner=null;
-
-    //public CombinePDFParams.Builder? CombinePDF(PDFServices? pdfServices_, CombinePDFParams.Builder? builder_=null)
-    //{
-    //    var asset = _selectPdfControl.GetAsset(pdfServices_);
-    //    if (asset != null)
-    //    {
-    //        builder_ =(builder_==null) ?CombinePDFParams.CombinePDFParamsBuilder().AddAsset(asset): builder_.AddAsset(asset);
-    //    }
-
-    //    return builder_;
-    //}
 
     public override IAsset? EventProcess(PDFServices? pdfServices_, IAsset? asset_)
     {
@@ -74,20 +55,9 @@ public partial class CombineControl : EventControl
             var pdfServicesResponse =pdfServices_?.GetJobResult<CombinePDFResult>(location, typeof(CombinePDFResult));
 
             // Get content from the resulting asset(s)
-            //IAsset resultAsset = pdfServicesResponse.Result.Asset;
-            //StreamAsset streamAsset = pdfServices.GetContent(resultAsset);
-
-            // Creating output streams and copying stream asset's content to it
-            ////String outputFilePath = CreateOutputFilePath();
-            ////new FileInfo(Directory.GetCurrentDirectory() + outputFilePath).Directory.Create();
-            ////Stream outputStream = File.OpenWrite(Directory.GetCurrentDirectory() + outputFilePath);
-            ////streamAsset.Stream.CopyTo(outputStream);
-            ////outputStream.Close();
-
             return pdfServicesResponse?.Result.Asset;
 
         }
-
 
         return asset_;
     }

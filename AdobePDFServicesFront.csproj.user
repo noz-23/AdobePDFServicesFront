@@ -14,6 +14,9 @@
     <Compile Update="Controls\CredentialsControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\DeleteControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\ExportControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -21,6 +24,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Controls\OpenPdfControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\ProtectControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

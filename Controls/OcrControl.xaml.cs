@@ -1,7 +1,6 @@
 ﻿using Adobe.PDFServicesSDK;
 using Adobe.PDFServicesSDK.io;
 using Adobe.PDFServicesSDK.pdfjobs.jobs;
-using Adobe.PDFServicesSDK.pdfjobs.parameters.compresspdf;
 using Adobe.PDFServicesSDK.pdfjobs.parameters.ocr;
 using Adobe.PDFServicesSDK.pdfjobs.results;
 using System.Collections.ObjectModel;
@@ -23,7 +22,6 @@ public partial class OcrControl : EventControl
         _comboBox.SelectedValue = OCRSupportedLocale.JA_JP;
 
     }
-
     public override IAsset? EventProcess(PDFServices? pdfServices_, IAsset? asset_)
     {
         Debug.WriteLine("処理 OCR");

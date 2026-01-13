@@ -1,13 +1,9 @@
-﻿using Adobe.PDFServicesSDK.io;
-using AdobePDFServicesFront.Controls;
-using System;
+﻿using AdobePDFServicesFront.Controls;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace AdobePDFServicesFront.Windows;
 
@@ -103,6 +99,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     #region メニュー
     private void _combineMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new CombineControl(ControlList));
+    private void _deleteMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new DeleteControl(ControlList));
     private void _autoTagMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new AutoTagControl(ControlList));
     private void _compressMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new CompressControl(ControlList));
     private void _ocrMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new OcrControl(ControlList));

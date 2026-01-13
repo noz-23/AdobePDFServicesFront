@@ -1,9 +1,6 @@
-﻿using Adobe.PDFServicesSDK;
-using Adobe.PDFServicesSDK.io;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;

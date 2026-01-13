@@ -67,10 +67,30 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 >
-                <MenuItem 
+                <MenuItem
+                    Header="編集"
+                    >
+                    <MenuItem 
                         Header="結合"
                         Click="_combineMenuItemClick"
                         />
+                    <MenuItem 
+                        Header="結合"
+                        Click="_deleteMenuItemClick"
+                        />
+                </MenuItem>
+                <MenuItem
+                    Header="セキュリティ"
+                    >
+                    <MenuItem 
+                        Header="保護"
+                        Click="_combineMenuItemClick"
+                        />
+                    <MenuItem 
+                        Header="保護解除"
+                        Click="_combineMenuItemClick"
+                        />
+                </MenuItem>
                 <MenuItem
                         Header="処理"
                     >

@@ -1,5 +1,4 @@
-﻿<UserControl
-    x:Name="_userControl"
+﻿<local:EventControl
     x:Class="AdobePDFServicesFront.Controls.OpenPdfControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -27,7 +26,7 @@
             Grid.Column="1"
             Margin="2"
             VerticalAlignment="Center"
-            Text="{Binding FilePath, ElementName=_userControl,Mode=TwoWay}"
+            Text="{Binding FilePath,Mode=TwoWay}"
             />
         <TextBlock 
             Grid.Column="2"
@@ -42,4 +41,4 @@
             Click="_buttonClick"
             />
     </Grid>
-</UserControl>
+</local:EventControl>

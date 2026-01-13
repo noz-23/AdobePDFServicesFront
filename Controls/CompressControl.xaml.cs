@@ -18,13 +18,9 @@ public partial class CompressControl : EventControl
         Debug.WriteLine("追加 軽量化");
 
         InitializeComponent();
-        //Debug.WriteLine("CompressControl");
-        //_comboBox.ItemsSource = CompressionLevelEnum;
         _comboBox.ItemsSource = Enum.GetValues<CompressionLevel>();
         _comboBox.SelectedValue = CompressionLevel.MEDIUM;
     }
-
-    //public IEnumerable<CompressionLevel> CompressionLevelEnum { get => Enum.GetValues<CompressionLevel>(); }
 
     public override IAsset? EventProcess(PDFServices? pdfServices_, IAsset? asset_)
     {
@@ -43,16 +39,6 @@ public partial class CompressControl : EventControl
             var pdfServicesResponse = pdfServices_?.GetJobResult<CompressPDFResult>(location, typeof(CompressPDFResult));
 
             // Get content from the resulting asset(s)
-            //IAsset resultAsset = pdfServicesResponse.Result.Asset;
-            //var streamAsset = pdfServices_?.GetContent(resultAsset);
-
-            // Creating output streams and copying stream asset's content to it
-            //String outputFilePath = CreateOutputFilePath();
-            //new FileInfo(Directory.GetCurrentDirectory() + outputFilePath).Directory.Create();
-            //Stream outputStream = File.OpenWrite(Directory.GetCurrentDirectory() + outputFilePath);
-            //streamAsset.Stream.CopyTo(outputStream);
-            //outputStream.Close();
-
             return pdfServicesResponse?.Result.Asset;
         }
         return asset_;

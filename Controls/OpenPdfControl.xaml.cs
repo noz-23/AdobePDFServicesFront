@@ -1,12 +1,12 @@
 ﻿using Adobe.PDFServicesSDK;
 using Adobe.PDFServicesSDK.io;
+using AdobePDFServicesFront.Interfaces;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using Windows.Data.Pdf;
 using Windows.Storage;
 
@@ -15,16 +15,15 @@ namespace AdobePDFServicesFront.Controls;
 /// <summary>
 /// OpenPdfControl.xaml の相互作用ロジック
 /// </summary>
-public partial class OpenPdfControl : UserControl,INotifyPropertyChanged
+public partial class OpenPdfControl : EventControl, INotifyPropertyChanged, IPageCount
 {
     // https://qiita.com/tricogimmick/items/62cd9f5deca365a83858
-    public OpenPdfControl()
+    public OpenPdfControl():base()
     {
         InitializeComponent();
         //
         DataContext = this;
     }
-
 
     #region INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged = null;
@@ -78,7 +77,7 @@ public partial class OpenPdfControl : UserControl,INotifyPropertyChanged
     }
     private int _pageCount = 0;
 
-    
+   
     #endregion
 
     private void _buttonClick(object sender_, RoutedEventArgs e_)
@@ -114,6 +113,4 @@ public partial class OpenPdfControl : UserControl,INotifyPropertyChanged
         }
         return null;
     }
-
-
 }

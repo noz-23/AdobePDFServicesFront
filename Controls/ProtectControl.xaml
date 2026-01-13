@@ -1,12 +1,12 @@
 ﻿<local:EventControl
-    x:Class="AdobePDFServicesFront.Controls.CompressControl"
+    x:Class="AdobePDFServicesFront.Controls.ProtectControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:AdobePDFServicesFront.Controls"
     mc:Ignorable="d" 
-    d:DesignHeight="30"
+    d:DesignHeight="130"
     d:DesignWidth="400"
     BorderBrush="Gray"
     BorderThickness="1"
@@ -21,13 +21,56 @@
             Grid.Column="0"
             Margin="2"
             VerticalAlignment="Center"
-            Text="軽量化"
+            Text="保護"
             FontWeight="Bold"
             />
-        <ComboBox 
-            x:Name="_comboBox"
+        <StackPanel
             Grid.Column="1"
-            />
+            Margin="2"
+            >
+            <StackPanel
+                Orientation="Horizontal">
+                <TextBlock 
+                    Text="暗号化"
+                    />
+                <ComboBox 
+                    />
+                <ComboBox 
+                    />
+            </StackPanel>
+            <TextBox />
+            <TextBlock
+                Text="権限"
+                />
+            <CheckBox 
+                IsChecked="True"
+                Content="低品質印刷" 
+                />
+            <CheckBox 
+                IsChecked="True"
+                Content="高品質印刷" 
+                />
+            <CheckBox 
+                IsChecked="True"
+                Content="編集(コメント追加とページ抽出除く)" 
+                />
+            <CheckBox
+                IsChecked="True"
+                Content="ページ挿入、削除、回転"
+                />
+            <CheckBox
+                IsChecked="True"
+                Content="コメント追加、デジタル署名、フォーム入力"
+                />
+            <CheckBox
+                IsChecked="True"
+                Content="フォーム入力、デジタル署名、テンプレートページの作成" 
+                />
+            <CheckBox
+                IsChecked="True"
+                Content="コンテンツのコピー"
+                />
+        </StackPanel>
         <Button
             Grid.Column="2"
             Margin="2"

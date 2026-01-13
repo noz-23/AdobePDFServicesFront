@@ -1,5 +1,6 @@
 ﻿using Adobe.PDFServicesSDK;
 using Adobe.PDFServicesSDK.io;
+using AdobePDFServicesFront.Interfaces;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -33,5 +34,24 @@ public class EventControl:UserControl
     public virtual IAsset? EventProcess(PDFServices? pdfServices_, IAsset? asset_) 
     {
         return asset_;
+    }
+
+    public int NowPageCount()
+    {
+        var rtn = 0;
+
+        foreach (var control in _controlList)
+        {
+            if (control == this)
+            {
+                break;
+            }
+            if (control is IPageCount pageControl)
+            {
+                rtn += pageControl.PageCount;
+            }
+        }
+
+        return rtn;
     }
 }
