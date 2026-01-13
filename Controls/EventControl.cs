@@ -8,7 +8,12 @@ namespace AdobePDFServicesFront.Controls;
 
 public class EventControl:UserControl
 {
-    public EventControl(ObservableCollection<EventControl> list_) : base()
+    protected EventControl() : base()
+    {
+        _controlList = new();
+    }
+
+    protected EventControl(ObservableCollection<EventControl> list_) : base()
     {
         _controlList = list_;
     }
@@ -29,6 +34,4 @@ public class EventControl:UserControl
     {
         return asset_;
     }
-
-
 }

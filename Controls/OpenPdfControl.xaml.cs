@@ -7,16 +7,18 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using Windows.Data.Pdf;
+using Windows.Storage;
 
 namespace AdobePDFServicesFront.Controls;
 
 /// <summary>
-/// SelectPdfControl.xaml の相互作用ロジック
+/// OpenPdfControl.xaml の相互作用ロジック
 /// </summary>
-public partial class SelectPdfControl : UserControl,INotifyPropertyChanged
+public partial class OpenPdfControl : UserControl,INotifyPropertyChanged
 {
     // https://qiita.com/tricogimmick/items/62cd9f5deca365a83858
-    public SelectPdfControl()
+    public OpenPdfControl()
     {
         InitializeComponent();
         //
@@ -44,7 +46,7 @@ public partial class SelectPdfControl : UserControl,INotifyPropertyChanged
         }
     }
     // static ↓ ?
-    public static readonly DependencyProperty SelectFilePathProperty = DependencyProperty.Register(nameof(FilePath), typeof(string), typeof(SelectPdfControl));
+    public static readonly DependencyProperty SelectFilePathProperty = DependencyProperty.Register(nameof(FilePath), typeof(string), typeof(OpenPdfControl));
 
     public string Title
     {
@@ -61,14 +63,30 @@ public partial class SelectPdfControl : UserControl,INotifyPropertyChanged
     }
     private string _title = "対象";
 
+    public int PageCount
+    {
+        get => _pageCount;
+        set
+        {
+            if (_pageCount == value)
+            {
+                return;
+            }
+            _pageCount = value;
+            _notifyPropertyChanged();
+        }
+    }
+    private int _pageCount = 0;
+
+    
     #endregion
 
     private void _buttonClick(object sender_, RoutedEventArgs e_)
     {
         var dlg = new OpenFileDialog
         {
-            DefaultExt = Resource.ExtensionPDF,
-            Filter = $"PDF ファイル (*{Resource.ExtensionPDF})|*{Resource.ExtensionPDF}",
+            DefaultExt = Properties.Resources.ExtensionPDF,
+            Filter = $"PDF ファイル (*{Properties.Resources.ExtensionPDF})|*{Properties.Resources.ExtensionPDF}",
             Multiselect = false
         };
         //
@@ -78,7 +96,12 @@ public partial class SelectPdfControl : UserControl,INotifyPropertyChanged
         }
         //
         this.FilePath =dlg.FileName;
-        Debug.WriteLine($"FilePath {FilePath}");
+        Debug.WriteLine($"Open [{FilePath}]");
+
+        var file = StorageFile.GetFileFromPathAsync(this.FilePath).Get();
+        //ここから
+        var pdf =PdfDocument.LoadFromFileAsync(file).AsTask().Result;
+        PageCount = (int)pdf.PageCount;
     }
 
     public IAsset? GetAsset(PDFServices? pdfServices_)

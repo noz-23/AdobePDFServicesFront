@@ -14,7 +14,13 @@
     <Compile Update="Controls\CredentialsControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\SelectPdfControl.xaml.cs">
+    <Compile Update="Controls\ExportControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\OcrControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\OpenPdfControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

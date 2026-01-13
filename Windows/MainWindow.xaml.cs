@@ -21,9 +21,9 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         InitializeComponent();
         //
         DataContext = this;
-        if (Directory.Exists(Resource.TempPath) == false)
+        if (Directory.Exists(Properties.Resources.TempPath) == false)
         {
-            Directory.CreateDirectory(Resource.TempPath);
+            Directory.CreateDirectory(Properties.Resources.TempPath);
         }
     }
 
@@ -94,27 +94,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
         if (asset != null)
         {
-            var dlg = new Microsoft.Win32.SaveFileDialog
-            {
-                FileName = "output"+Resource.ExtensionPDF,
-                DefaultExt = Resource.ExtensionPDF,
-                Filter = $"PDF ファイル (*{Resource.ExtensionPDF})|*{Resource.ExtensionPDF}",
-            };
-
-            if (dlg.ShowDialog() == false)
-            {
-                return;
-            }
-            Debug.WriteLine($"SavePath {dlg.FileName}");
-
-            // Get content from the resulting asset(s)
-            var streamAsset = pdfServices.GetContent(asset);
-
-            // Creating output streams and copying stream asset's content to it
-
-            using var outputStream = File.OpenWrite(dlg.FileName);
-            streamAsset.Stream.CopyTo(outputStream);
-            outputStream.Close();
+            _exportControl.EventProcess(pdfServices, asset);
         }
     }
     #endregion
@@ -125,6 +105,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private void _combineMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new CombineControl(ControlList));
     private void _autoTagMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new AutoTagControl(ControlList));
     private void _compressMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new CompressControl(ControlList));
+    private void _ocrMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new OcrControl(ControlList));
     #endregion
 
     // D&D

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdobePDFServicesFront {
+namespace AdobePDFServicesFront.Properties {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace AdobePDFServicesFront {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource() {
+        internal Resources() {
         }
         
         /// <summary>
         ///   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AdobePDFServicesFront.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AdobePDFServicesFront.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace AdobePDFServicesFront {
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,18 +61,54 @@ namespace AdobePDFServicesFront {
         }
         
         /// <summary>
+        ///   .docx に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExtensionDOCX {
+            get {
+                return ResourceManager.GetString("ExtensionDOCX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   .pdf に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string ExtensionPDF {
+        public static string ExtensionPDF {
             get {
                 return ResourceManager.GetString("ExtensionPDF", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   .pptx に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExtensionPPTX {
+            get {
+                return ResourceManager.GetString("ExtensionPPTX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   .xlsx に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExtensionXLSX {
+            get {
+                return ResourceManager.GetString("ExtensionXLSX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   .zip に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ExtensionZIP {
+            get {
+                return ResourceManager.GetString("ExtensionZIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   .\temp\ に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string TempPath {
+        public static string TempPath {
             get {
                 return ResourceManager.GetString("TempPath", resourceCulture);
             }

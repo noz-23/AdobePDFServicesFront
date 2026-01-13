@@ -123,6 +123,22 @@
   </data>
   <data name="ExtensionPDF" xml:space="preserve">
     <value>.pdf</value>
-    <comment>拡張子 pdf</comment>
+    <comment>拡張子[pdf]</comment>
+  </data>
+  <data name="ExtensionXLSX" xml:space="preserve">
+    <value>.xlsx</value>
+    <comment>拡張子[xlsx]</comment>
+  </data>
+  <data name="ExtensionDOCX" xml:space="preserve">
+    <value>.docx</value>
+    <comment>拡張子[docx]</comment>
+  </data>
+  <data name="ExtensionPPTX" xml:space="preserve">
+    <value>.pptx</value>
+    <comment>拡張子[pptx]</comment>
+  </data>
+  <data name="ExtensionZIP" xml:space="preserve">
+    <value>.zip</value>
+    <comment>拡張子[zip]</comment>
   </data>
 </root>

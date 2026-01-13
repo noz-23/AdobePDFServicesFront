@@ -51,7 +51,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <control:SelectPdfControl
+            <control:OpenPdfControl
                 x:Name="_selectPdfControl"
                 Grid.Row="0"
                 Grid.Column="0"
@@ -71,14 +71,22 @@
                         Header="結合"
                         Click="_combineMenuItemClick"
                         />
-                <MenuItem 
+                <MenuItem
+                        Header="処理"
+                    >
+                    <MenuItem 
                         Header="自動タグ"
                         Click="_autoTagMenuItemClick"
                         />
-                <MenuItem 
+                    <MenuItem 
+                        Header="OCR"
+                        Click="_ocrMenuItemClick"
+                        />
+                    <MenuItem 
                         Header="軽量化"
                         Click="_compressMenuItemClick"
                         />
+                </MenuItem>
             </Menu>
             <ItemsControl
                 x:Name="_itemsPanel"
@@ -94,13 +102,25 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button
+            <Grid
                 Grid.Row="5"
                 Grid.Column="0"
-                Margin="2"
-                Content="実行"
-                Click="_runButtonClick"
-                />
+                Margin="2"    
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Content="実行"
+                    Click="_runButtonClick"
+                    />
+                <control:ExportControl
+                    x:Name="_exportControl"
+                    Grid.Column="1"
+                    />
+            </Grid>
         </Grid>
     </Grid>
 </Window>
