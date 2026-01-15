@@ -1,8 +1,8 @@
-# AdobePDFServicesFront
+ï»¿# AdobePDFServicesFront
 Adobe PDF Services Front End
 
 
-# —˜—pƒ‰ƒCƒuƒ‰ƒŠ
+# åˆ©ç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 
 ## Adobe.PDFServicesSDK
 https://developer.adobe.com/document-services/docs/overview/pdf-services-api/

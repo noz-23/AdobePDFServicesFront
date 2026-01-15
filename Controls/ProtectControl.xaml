@@ -5,8 +5,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:AdobePDFServicesFront.Controls"
+    xmlns:prop="clr-namespace:AdobePDFServicesFront.Properties"
     mc:Ignorable="d" 
-    d:DesignHeight="130"
+    d:DesignHeight="170"
     d:DesignWidth="400"
     BorderBrush="Gray"
     BorderThickness="1"
@@ -18,10 +19,10 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock
+            x:Name="_textBlock"
             Grid.Column="0"
             Margin="2"
             VerticalAlignment="Center"
-            Text="保護"
             FontWeight="Bold"
             />
         <StackPanel
@@ -33,40 +34,52 @@
                 <TextBlock 
                     Text="暗号化"
                     />
-                <ComboBox 
+                <ComboBox
+                    x:Name="_encryptionComboBox"
                     />
                 <ComboBox 
+                    x:Name="_contentComboBox"
                     />
             </StackPanel>
-            <TextBox />
+            <TextBox
+                x:Name="_passwordTextBox"
+                Text="{x:Static prop:Resources.OwnerPassword}"
+                />
             <TextBlock
                 Text="権限"
                 />
             <CheckBox 
+                x:Name="_lowPrintCheckBox"
                 IsChecked="True"
                 Content="低品質印刷" 
                 />
             <CheckBox 
+                x:Name="_highPrintCheckBox"
                 IsChecked="True"
                 Content="高品質印刷" 
                 />
             <CheckBox 
+                x:Name="_editContentCheckBox"
                 IsChecked="True"
                 Content="編集(コメント追加とページ抽出除く)" 
                 />
             <CheckBox
+                x:Name="_editDocumentCheckBox"
                 IsChecked="True"
                 Content="ページ挿入、削除、回転"
                 />
             <CheckBox
+                x:Name="_editAnnotationsCheckBox"
                 IsChecked="True"
                 Content="コメント追加、デジタル署名、フォーム入力"
                 />
             <CheckBox
+                x:Name="_editFormCheckBox"
                 IsChecked="True"
                 Content="フォーム入力、デジタル署名、テンプレートページの作成" 
                 />
             <CheckBox
+                x:Name="_copyCheckBox"
                 IsChecked="True"
                 Content="コンテンツのコピー"
                 />

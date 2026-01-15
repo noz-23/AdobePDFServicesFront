@@ -17,16 +17,17 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock
+            x:Name="_textBlock"
             Grid.Column="0"
             Margin="2"
             VerticalAlignment="Center"
-            Text="{Binding Title, Mode=OneWay}"
+            Text="対象"
             />
         <TextBox 
             Grid.Column="1"
             Margin="2"
             VerticalAlignment="Center"
-            Text="{Binding FilePath, ElementName=_userControl,Mode=TwoWay}"
+            Text="{Binding Path, ElementName=_userControl,Mode=TwoWay}"
             />
         <Button
             Grid.Column="2"

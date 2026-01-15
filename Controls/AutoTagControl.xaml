@@ -18,10 +18,10 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock
+            x:Name="_textBlock"
             Grid.Column="0"
             Margin="2"
             VerticalAlignment="Center"
-            Text="自動タグ"
             FontWeight="Bold"
             />
         <CheckBox

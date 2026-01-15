@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using AdobePDFServicesFront.Interfaces;
+using Microsoft.Win32;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -10,14 +11,14 @@ namespace AdobePDFServicesFront.Controls;
 /// <summary>
 /// OpenPdfControl.xaml の相互作用ロジック
 /// </summary>
-public partial class SaveFileControl : UserControl,INotifyPropertyChanged
+public partial class SaveFileControl : UserControl,INotifyPropertyChanged, ITitileName
 {
     // https://qiita.com/tricogimmick/items/62cd9f5deca365a83858
     public SaveFileControl()
     {
         InitializeComponent();
         //
-        DataContext = this;
+        //DataContext = this;
     }
 
 
@@ -31,34 +32,24 @@ public partial class SaveFileControl : UserControl,INotifyPropertyChanged
 
 
     #region プロパティ
-    public string FilePath
+    public string Path
     {
-        get => _filePath;
+        get => _path;
         set
         {
-            _filePath=value;
+            _path = value;
             _notifyPropertyChanged();
         }
     }
-    private string _filePath = string.Empty; 
+    private string _path = string.Empty; 
 
     public string Extension{ get;set;}
 
-    public string Title
+    public string TitleName
     {
-        get => _title;
-        set 
-        {
-            if (_title == value)
-            {
-                return;
-            }
-            _title = value;
-            _notifyPropertyChanged();
-        }
+        get => _textBlock.Text;
+        set => _textBlock.Text =value;
     }
-    private string _title = "対象";
-
     #endregion
 
     private void _buttonClick(object sender_, RoutedEventArgs e_)
@@ -79,7 +70,7 @@ public partial class SaveFileControl : UserControl,INotifyPropertyChanged
             return;
         }
         //
-        this.FilePath = dlg.FileName;
-        Debug.WriteLine($"Save [{FilePath}]");
+        this.Path = dlg.FileName;
+        Debug.WriteLine($"Save [{Path}]");
     }
 }

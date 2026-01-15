@@ -1,5 +1,4 @@
 ﻿<Window
-    x:Name="_window"
     x:Class="AdobePDFServicesFront.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -47,6 +46,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -56,7 +56,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                FilePath="{Binding FilePath,ElementName=_window,Mode=OneWay}"
+                Path="{Binding FilePath,Mode=TwoWay}"
                 />
             <control:CredentialsControl 
                 x:Name="_credentialsControl"
@@ -75,7 +75,7 @@
                         Click="_combineMenuItemClick"
                         />
                     <MenuItem 
-                        Header="結合"
+                        Header="削除"
                         Click="_deleteMenuItemClick"
                         />
                 </MenuItem>
@@ -84,11 +84,11 @@
                     >
                     <MenuItem 
                         Header="保護"
-                        Click="_combineMenuItemClick"
+                        Click="_protectMenuItemClick"
                         />
                     <MenuItem 
                         Header="保護解除"
-                        Click="_combineMenuItemClick"
+                        Click="_removeProtectionMenuItemClick"
                         />
                 </MenuItem>
                 <MenuItem
@@ -114,6 +114,18 @@
                 Grid.Column="0"
                 ItemsSource="{Binding ControlList,ElementName=_window,Mode=OneWay}"
                 >
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                        <ScrollViewer
+                            VerticalScrollBarVisibility="Auto"
+                            HorizontalScrollBarVisibility="Auto"
+                            >
+                            <StackPanel
+                                IsItemsHost="True"
+                                />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel
@@ -141,6 +153,16 @@
                     Grid.Column="1"
                     />
             </Grid>
+            <ProgressBar 
+                x:Name="_statusProgressBar"
+                Grid.Row="6"
+                Grid.Column="0"
+                />
+            <TextBlock
+                x:Name="_statusTextBlock"
+                Grid.Row="6"
+                Grid.Column="0"
+                />
         </Grid>
     </Grid>
 </Window>

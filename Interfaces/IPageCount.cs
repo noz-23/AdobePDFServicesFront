@@ -1,6 +1,6 @@
 ﻿namespace AdobePDFServicesFront.Interfaces;
 
-internal interface IPageCount
+public interface IPageCount
 {
      int PageCount { get; set; }
 }

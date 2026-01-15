@@ -3,6 +3,7 @@ using Adobe.PDFServicesSDK.io;
 using Adobe.PDFServicesSDK.pdfjobs.jobs;
 using Adobe.PDFServicesSDK.pdfjobs.parameters.compresspdf;
 using Adobe.PDFServicesSDK.pdfjobs.results;
+using AdobePDFServicesFront.Interfaces;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -13,18 +14,27 @@ namespace AdobePDFServicesFront.Controls;
 /// </summary>
 public partial class CompressControl : EventControl
 {
-    public CompressControl(ObservableCollection<EventControl> list_) : base(list_)
+    public CompressControl(IPageCount main_, ObservableCollection<EventControl> list_) : base(main_,list_)
     {
-        Debug.WriteLine("追加 軽量化");
-
         InitializeComponent();
+        //
+        TitleName = "軽量化";
+
         _comboBox.ItemsSource = Enum.GetValues<CompressionLevel>();
         _comboBox.SelectedValue = CompressionLevel.MEDIUM;
+        Debug.WriteLine($"追加 [{TitleName}]");
     }
 
+    #region プロパティ
+    public override string TitleName
+    {
+        get => _textBlock.Text;
+        set => _textBlock.Text = value;
+    }
+    #endregion
     public override IAsset? EventProcess(PDFServices? pdfServices_, IAsset? asset_)
     {
-        Debug.WriteLine("処理 軽量化");
+        Debug.WriteLine($"処理 [{TitleName}]");
 
         if (_comboBox.SelectedValue is CompressionLevel val)
         {

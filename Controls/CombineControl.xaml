@@ -18,10 +18,10 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock
+            x:Name="_textBlock"
             Grid.Column="0"
             Margin="3,0,1,0"
             VerticalAlignment="Center"
-            Text="結合"
             FontWeight="Bold"
             />
         <local:OpenPdfControl
@@ -29,7 +29,7 @@
             Grid.Column="1"
             Margin="2"
             VerticalAlignment="Center"
-            Title="選択"
+            TitleName="選択"
             />
         <Button
             Grid.Column="2"

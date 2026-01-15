@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdobePDFServicesFront.Properties
-{
-
-
+namespace AdobePDFServicesFront.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
     /// </summary>
@@ -102,6 +102,15 @@ namespace AdobePDFServicesFront.Properties
         public static string ExtensionZIP {
             get {
                 return ResourceManager.GetString("ExtensionZIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   password に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string OwnerPassword {
+            get {
+                return ResourceManager.GetString("OwnerPassword", resourceCulture);
             }
         }
         

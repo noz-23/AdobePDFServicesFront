@@ -16,17 +16,25 @@ public partial class CombineControl : EventControl,IPageCount
 {
     // 丸ボタン
     // https://qiita.com/rioLi0N/items/be25d8fe2d8c3b4b3c29
-    public CombineControl(ObservableCollection<EventControl> list_) : base(list_)
+    public CombineControl(IPageCount main_, ObservableCollection<EventControl> list_) : base(main_,list_)
     {
-        Debug.WriteLine("追加 結合");
 
         InitializeComponent();
+        TitleName = "結合";
+
+        Debug.WriteLine($"追加 [{TitleName}]");
     }
+
     #region プロパティ
+    public override string TitleName
+    {
+        get => _textBlock.Text;
+        set => _textBlock.Text = value;
+    }
     public string CombinePath
     {
-        get => _selectPdfControl.FilePath;
-        set => _selectPdfControl.FilePath = value;
+        get => _selectPdfControl.Path;
+        set => _selectPdfControl.Path = value;
     }
 
     public int PageCount
@@ -39,7 +47,7 @@ public partial class CombineControl : EventControl,IPageCount
 
     public override IAsset? EventProcess(PDFServices? pdfServices_, IAsset? asset_)
     {
-        Debug.WriteLine("処理 結合");
+        Debug.WriteLine($"処理 [{TitleName}]");
 
         var combineAsset = _selectPdfControl.GetAsset(pdfServices_);
         if (combineAsset != null)

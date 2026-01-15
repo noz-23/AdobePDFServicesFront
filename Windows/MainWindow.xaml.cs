@@ -52,18 +52,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         }
     }
     private string _filePath = string.Empty;
-
     public ObservableCollection<EventControl> ControlList { get; } =new ();
-
-    //// Initial setup, create credentials instance
-    //ICredentials credentials = new ServicePrincipalCredentials(
-    //    Environment.GetEnvironmentVariable("PDF_SERVICES_CLIENT_ID"),
-    //    Environment.GetEnvironmentVariable("PDF_SERVICES_CLIENT_SECRET"));
-
-    //private ICredentials? Credentials
-    //{ 
-    //}
-
     #endregion
 
     #region イベント
@@ -81,11 +70,19 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             MessageBox.Show("認証失敗。");
             return;
         }
+
+        _statusProgressBar.Maximum = ControlList.Count + 1;
+        _statusProgressBar.Value = 0;
+        _statusTextBlock.Text = "処理 [読込]";
+        //
         var asset = _selectPdfControl.GetAsset(pdfServices);
+        _statusProgressBar.Value++;
 
         foreach (var control in ControlList)
         {
+            _statusTextBlock.Text = $"処理 [{control.TitleName}]";
             asset = control.EventProcess(pdfServices, asset);
+            _statusProgressBar.Value++;
         }
 
         if (asset != null)
@@ -95,14 +92,14 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     }
     #endregion
 
-    //public List<Control> _controlList = new ();
-
     #region メニュー
-    private void _combineMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new CombineControl(ControlList));
-    private void _deleteMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new DeleteControl(ControlList));
-    private void _autoTagMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new AutoTagControl(ControlList));
-    private void _compressMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new CompressControl(ControlList));
-    private void _ocrMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new OcrControl(ControlList));
+    private void _combineMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new CombineControl(_selectPdfControl, ControlList));
+    private void _deleteMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new DeleteControl(_selectPdfControl, ControlList));
+    private void _autoTagMenuItemClick(object sender_, RoutedEventArgs e_)=> ControlList.Add(new AutoTagControl(_selectPdfControl, ControlList));
+    private void _compressMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new CompressControl(_selectPdfControl, ControlList));
+    private void _ocrMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new OcrControl(_selectPdfControl, ControlList));
+    private void _protectMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new ProtectControl(_selectPdfControl, ControlList));
+    private void _removeProtectionMenuItemClick(object sender_, RoutedEventArgs e_) => ControlList.Add(new RemoveProtectControl(_selectPdfControl, ControlList));
     #endregion
 
     // D&D

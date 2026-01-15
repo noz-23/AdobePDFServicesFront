@@ -3,8 +3,10 @@ using Adobe.PDFServicesSDK.io;
 using Adobe.PDFServicesSDK.pdfjobs.jobs;
 using Adobe.PDFServicesSDK.pdfjobs.parameters.autotag;
 using Adobe.PDFServicesSDK.pdfjobs.results;
+using AdobePDFServicesFront.Interfaces;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Controls;
 
 namespace AdobePDFServicesFront.Controls;
 
@@ -13,16 +15,29 @@ namespace AdobePDFServicesFront.Controls;
 /// </summary>
 public partial class AutoTagControl : EventControl
 {
-    public AutoTagControl(ObservableCollection<EventControl> list_) : base(list_)
-    {
-        Debug.WriteLine("追加 自動タグ");
+    //public AutoTagControl():base()
+    //{
+    //    InitializeComponent();
+    //}
 
+    public AutoTagControl(IPageCount main_, ObservableCollection<EventControl> list_) : base(main_,list_)
+    {
         InitializeComponent();
+        TitleName = "自動タグ";
+
+        Debug.WriteLine($"追加 [{TitleName}]");
     }
+    #region プロパティ
+    public override string TitleName
+    {
+        get => _textBlock.Text;
+        set => _textBlock.Text = value;
+    }
+    #endregion
 
     public override IAsset? EventProcess(PDFServices? pdfServices_, IAsset? asset_)
     {
-        Debug.WriteLine("処理 自動タグ");
+        Debug.WriteLine($"処理 [{TitleName}]");
 
         var builder = AutotagPDFParams.AutotagPDFParamsBuilder();
         if (_checkBox.IsChecked == true)

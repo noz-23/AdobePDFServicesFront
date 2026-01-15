@@ -15,19 +15,26 @@ namespace AdobePDFServicesFront.Controls;
 /// </summary>
 public partial class DeleteControl : EventControl,IPageCount
 {
-    public DeleteControl(ObservableCollection<EventControl> list_) : base(list_)
+    public DeleteControl(IPageCount main_, ObservableCollection<EventControl> list_) : base(main_,list_)
     {
-        Debug.WriteLine("追加 削除");
-
         InitializeComponent();
+
+        TitleName = "削除";
+        Debug.WriteLine($"追加 [{TitleName}]");
     }
 
     #region プロパティ
+    public override string TitleName
+    {
+        get => _textBlock.Text;
+        set => _textBlock.Text = value;
+    }
+
     public int PageCount { get; set; } = 0;
     #endregion
     public override IAsset? EventProcess(PDFServices? pdfServices_, IAsset? asset_)
     {
-        Debug.WriteLine("処理 削除");
+        Debug.WriteLine($"処理 [{TitleName}]");
 
         var list =(new HashSet<string>(_textBox.Text.Replace(" ", string.Empty).Split(','))).ToList();
 

@@ -141,4 +141,8 @@
     <value>.zip</value>
     <comment>拡張子[zip]</comment>
   </data>
+  <data name="OwnerPassword" xml:space="preserve">
+    <value>password</value>
+    <comment>デフォルトの保護パスワード</comment>
+  </data>
 </root>

@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using Windows.Data.Pdf;
 using Windows.Storage;
 
@@ -15,14 +16,14 @@ namespace AdobePDFServicesFront.Controls;
 /// <summary>
 /// OpenPdfControl.xaml の相互作用ロジック
 /// </summary>
-public partial class OpenPdfControl : EventControl, INotifyPropertyChanged, IPageCount
+public partial class OpenPdfControl : UserControl, INotifyPropertyChanged, IPageCount, ITitileName
 {
     // https://qiita.com/tricogimmick/items/62cd9f5deca365a83858
     public OpenPdfControl():base()
     {
         InitializeComponent();
         //
-        DataContext = this;
+        //DataContext = this;
     }
 
     #region INotifyPropertyChanged
@@ -33,35 +34,23 @@ public partial class OpenPdfControl : EventControl, INotifyPropertyChanged, IPag
     }
     #endregion
 
-
     #region プロパティ
-    public string FilePath
+    public string Path
     {
-        get => (string)GetValue(SelectFilePathProperty);
+        get => (string)GetValue(PathProperty);
         set
         {
-            SetValue(SelectFilePathProperty, value);
+            SetValue(PathProperty, value);
             _notifyPropertyChanged();
         }
     }
-    // static ↓ ?
-    public static readonly DependencyProperty SelectFilePathProperty = DependencyProperty.Register(nameof(FilePath), typeof(string), typeof(OpenPdfControl));
+    public static readonly DependencyProperty PathProperty = DependencyProperty.Register(nameof(Path), typeof(string), typeof(OpenPdfControl));
 
-    public string Title
+    public string TitleName
     {
-        get => _title;
-        set 
-        {
-            if (_title == value)
-            {
-                return;
-            }
-            _title = value;
-            _notifyPropertyChanged();
-        }
+        get => _textBlock.Text;
+        set => _textBlock.Text = value;
     }
-    private string _title = "対象";
-
     public int PageCount
     {
         get => _pageCount;
@@ -77,7 +66,12 @@ public partial class OpenPdfControl : EventControl, INotifyPropertyChanged, IPag
     }
     private int _pageCount = 0;
 
-   
+    public string Info
+    {
+        get=> string.Format("{0} 頁, 保護 [{1}]",PageCount,(_isProtected == true) ? "あり" : "なし");
+    }
+    private bool _isProtected = false;
+
     #endregion
 
     private void _buttonClick(object sender_, RoutedEventArgs e_)
@@ -94,20 +88,22 @@ public partial class OpenPdfControl : EventControl, INotifyPropertyChanged, IPag
             return;
         }
         //
-        this.FilePath =dlg.FileName;
-        Debug.WriteLine($"Open [{FilePath}]");
+        this.Path = dlg.FileName;
+        Debug.WriteLine($"Open [{Path}]");
 
-        var file = StorageFile.GetFileFromPathAsync(this.FilePath).Get();
-        //ここから
+        var file = StorageFile.GetFileFromPathAsync(this.Path).Get();
         var pdf =PdfDocument.LoadFromFileAsync(file).AsTask().Result;
+        //
         PageCount = (int)pdf.PageCount;
+        _isProtected = pdf.IsPasswordProtected;
+        _notifyPropertyChanged(nameof(Info));
     }
 
     public IAsset? GetAsset(PDFServices? pdfServices_)
     {
-        if (File.Exists(FilePath) == true)
+        if (File.Exists(Path) == true)
         {
-            using var stream = File.OpenRead(FilePath);
+            using var stream = File.OpenRead(Path);
 
             return pdfServices_?.Upload(stream, PDFServicesMediaType.PDF.GetMIMETypeValue());
         }

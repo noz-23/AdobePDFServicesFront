@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:AdobePDFServicesFront.Controls"
     xmlns:prop="clr-namespace:AdobePDFServicesFront.Properties"
     mc:Ignorable="d" 
-    d:DesignHeight="200"
+    d:DesignHeight="215"
     d:DesignWidth="400"
     BorderBrush="Gray"
     BorderThickness="1"
@@ -26,7 +26,8 @@
             Grid.Column="1"
             Margin="2"
             VerticalAlignment="Center"
-            Title="PDF保存" 
+            TitleName="PDF保存" 
+            Extension="{x:Static prop:Resources.ExtensionPDF}"
             />
         <Expander
             Grid.Row="1"
@@ -47,83 +48,107 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox 
-                    x:Name="_xlsxCheckBox"
+                    x:Name="_splitCheckBox"
                     Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Content="分割" 
+                    />
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    >
+                    <TextBox 
+                        x:Name="_splitTextBox"
+                        Width="100"
+                        Margin="2"
+                        VerticalAlignment="Center"
+                        Text="1"
+                        TextAlignment="Right"
+                        />
+                    <TextBlock
+                        Text="最大ページ数"
+                        />
+                </StackPanel>
+                <CheckBox 
+                    x:Name="_xlsxCheckBox"
+                    Grid.Row="1"
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     Content="Excel 出力" 
                     />
                 <local:SaveFileControl
                     x:Name="_xlsxSaveControl"
-                    Grid.Row="0"
+                    Grid.Row="1"
                     Grid.Column="1"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Title="" 
+                    TitleName="" 
                     Extension="{x:Static prop:Resources.ExtensionXLSX}"
                     />
                 <CheckBox
                     x:Name="_docxCheckBox"                    
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     Content="Word 出力"
                     />
                 <local:SaveFileControl
                     x:Name="_docxSaveControl"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.Column="1"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Title="" 
+                    TitleName="" 
                     Extension="{x:Static prop:Resources.ExtensionDOCX}"
                     />
                 <CheckBox 
                     x:Name="_pptxCheckBox"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     Content="PowerPoint 出力"
                     />
                 <local:SaveFileControl
                     x:Name="_pptxSaveControl"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Grid.Column="1"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Title=""
+                    TitleName=""
                     Extension="{x:Static prop:Resources.ExtensionPPTX}"
                     />
                 <CheckBox 
                     x:Name="_imageCheckBox"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     Content="画像 出力" 
                     />
                 <local:SaveFileControl
                     x:Name="_imageSaveControl"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.Column="1"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Title="" 
+                    TitleName="" 
                     Extension="{x:Static prop:Resources.ExtensionZIP}"
                     />
                 <CheckBox 
                     x:Name="_textCheckBox"
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     Content="テキスト 出力"
                     />
                 <local:SaveFileControl
                     x:Name="_textSaveControl"
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="1"
                     Margin="2"
                     VerticalAlignment="Center"
-                    Title="" 
+                    TitleName="" 
                     Extension="{x:Static prop:Resources.ExtensionZIP}"
                     />
             </Grid>

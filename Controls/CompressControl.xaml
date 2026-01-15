@@ -18,10 +18,10 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock
+            x:Name="_textBlock"
             Grid.Column="0"
             Margin="2"
             VerticalAlignment="Center"
-            Text="軽量化"
             FontWeight="Bold"
             />
         <ComboBox 
