@@ -7,6 +7,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <PlatformTarget>x64</PlatformTarget>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>Icon.ico</PackageIcon>
+    <Copyright>noz-23</Copyright>
+    <PackageProjectUrl>https://github.com/noz-23/AdobePDFServicesFront</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,9 +42,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Properties\Icon.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

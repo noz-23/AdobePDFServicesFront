@@ -34,7 +34,7 @@
             <TextBlock 
                 Margin="2"
                 VerticalAlignment="Center"
-                Text="{Binding Info, Mode=OneWay}"
+                Text="{Binding Info,ElementName=_userControl, Mode=OneWay}"
             />
         </StackPanel>
         <Button

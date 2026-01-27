@@ -1,5 +1,20 @@
 ﻿# AdobePDFServicesFront
-Adobe PDF Services Front End
+Adobe PDF Services のフロントエンドのアプリケーション
+
+
+# 主な機能
+https://developer.adobe.com/document-services/
+
+## 編集
+### 結合
+### 削除
+## セキュリティ
+### 保護
+### 保護解除
+## 処理
+### 自動タグ
+### OCR
+### 最適化
 
 
 # 利用ライブラリ
